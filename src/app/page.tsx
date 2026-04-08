@@ -97,10 +97,10 @@ const galleryTabs = [
   {
     label: "Resultados",
     images: [
-      { src: "/resultado-1.jpg", caption: "Transformação Corporal" },
-      { src: "/resultado-2.jpg", caption: "Transformação Corporal" },
-      { src: "/resultado-3.jpg", caption: "Transformação Corporal" },
-      { src: "/resultado-4.jpg", caption: "Transformação Corporal" },
+      { src: "/lipedema-1.jpg", caption: "Transformação Lipedema" },
+      { src: "/seca-barriga-1.jpg", caption: "Protocolo Seca Barriga" },
+      { src: "/lipedema-2.jpg", caption: "Redução Corporal" },
+      { src: "/seca-barriga-2.jpg", caption: "Resultado Estético" },
     ],
   },
   {
@@ -215,7 +215,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 rounded-[40px] bg-gradient-to-tr from-plenna-pink/5 to-transparent pointer-events-none" />
               <Image
-                src="/Logo.jpg"
+                src="/Logo-sem-fundo.jpg"
                 alt="Plenna Estética e Emagrecimento"
                 width={500}
                 height={250}
@@ -728,7 +728,7 @@ export default function Home() {
           <div className="text-center pt-8 border-t border-gray-100 flex flex-col items-center">
             <div className="w-28 opacity-90 mb-5 brightness-110 contrast-125">
               <Image
-                src="/Logo.jpg"
+                src="/Logo-sem-fundo.jpg"
                 alt="Plenna Estética"
                 width={120}
                 height={60}
