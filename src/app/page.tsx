@@ -215,11 +215,12 @@ export default function Home() {
             >
               <div className="absolute inset-0 rounded-[40px] bg-gradient-to-tr from-plenna-pink/5 to-transparent pointer-events-none" />
               <Image
-                src="/Logo-sem-fundo.jpg"
+                src="/logo-sem-fundo.jpg"
                 alt="Plenna Estética e Emagrecimento"
                 width={500}
                 height={250}
-                className="w-full h-auto drop-shadow-sm"
+                className="w-full h-auto drop-shadow-sm brightness-110 contrast-125"
+                style={{ mixBlendMode: 'screen' }}
                 priority
               />
             </motion.div>
@@ -728,11 +729,12 @@ export default function Home() {
           <div className="text-center pt-8 border-t border-gray-100 flex flex-col items-center">
             <div className="w-28 opacity-90 mb-5 brightness-110 contrast-125">
               <Image
-                src="/Logo-sem-fundo.jpg"
+                src="/logo-sem-fundo.jpg"
                 alt="Plenna Estética"
                 width={120}
                 height={60}
-                className="w-full h-auto"
+                className="w-full h-auto brightness-110 contrast-125"
+                style={{ mixBlendMode: 'screen' }}
               />
             </div>
             <p className="text-[12px] text-gray-400 font-semibold mb-1">
