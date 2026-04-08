@@ -2,12 +2,14 @@
 
 :root {
   --background: #FFFFFF;
-  --foreground: #2C2C2C;
-  --plenna-pink: #E8B4C2;
-  --plenna-pink-hover: #D89EB0;
-  --plenna-gold: #E5C8A0;
-  --plenna-teal: #7BC8C1;
-  --plenna-soft: #FAF7F4;
+  --foreground: #1A1A1A;
+  --plenna-pink: #FF4D8D; /* Mais vibrante */
+  --plenna-pink-soft: #FFE5EE;
+  --plenna-pink-hover: #E63977;
+  --plenna-gold: #D4AF37; /* Dourado mais rico */
+  --plenna-gold-soft: #FCF5E5;
+  --plenna-teal: #00A69C; /* Teal mais profundo */
+  --plenna-soft: #FFF9F9;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -15,8 +17,10 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-plenna-pink: var(--plenna-pink);
+  --color-plenna-pink-soft: var(--plenna-pink-soft);
   --color-plenna-pink-hover: var(--plenna-pink-hover);
   --color-plenna-gold: var(--plenna-gold);
+  --color-plenna-gold-soft: var(--plenna-gold-soft);
   --color-plenna-teal: var(--plenna-teal);
   --color-plenna-soft: var(--plenna-soft);
   

@@ -144,6 +144,12 @@ const testimonials = [
   },
 ];
 
+const doctorPhotos = [
+  { src: "/doutora-1.jpg", alt: "Dra. Rita na Clínica" },
+  { src: "/doutora-2.jpg", alt: "Dra. Rita realizando procedimento" },
+  { src: "/doutora-3.jpg", alt: "Dra. Rita - Especialista" },
+];
+
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
@@ -184,42 +190,36 @@ export default function Home() {
         {/* ════════════════════════════════════════
             HERO
         ════════════════════════════════════════ */}
+        {/* ════════════════════════════════════════
+            HERO - IDENTIDADE & IMPACTO
+        ════════════════════════════════════════ */}
         <section
-          className="relative flex flex-col items-center pt-10 pb-10 px-6 overflow-hidden"
+          className="relative flex flex-col items-center pt-14 pb-12 px-6 overflow-hidden"
           style={{
-            background: "linear-gradient(180deg, #FAF7F4 0%, #ffffff 100%)",
+            background: "linear-gradient(180deg, var(--plenna-pink-soft) 0%, #ffffff 100%)",
           }}
         >
-          {/* Decorative blobs */}
-          <div
-            className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full opacity-40"
-            style={{
-              background:
-                "radial-gradient(circle, #E8B4C2 0%, transparent 70%)",
-            }}
-          />
-          <div
-            className="pointer-events-none absolute -bottom-10 -left-10 w-40 h-40 rounded-full opacity-25"
-            style={{
-              background:
-                "radial-gradient(circle, #E5C8A0 0%, transparent 70%)",
-            }}
-          />
-
+          {/* Decorative Elements */}
+          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white/40 to-transparent pointer-events-none" />
+          
           <motion.div
             initial="hidden"
             animate="show"
             variants={stagger}
             className="flex flex-col items-center w-full relative z-10"
           >
-            {/* Logo */}
-            <motion.div variants={fadeUp} className="w-44 mb-7">
+            {/* Logo Container - Made more visible/alive */}
+            <motion.div 
+              variants={fadeUp} 
+              className="relative w-56 mb-10 p-4 rounded-[40px] bg-white shadow-[0_20px_50px_rgba(255,77,141,0.15)] border border-white"
+            >
+              <div className="absolute inset-0 rounded-[40px] bg-gradient-to-tr from-plenna-pink/5 to-transparent pointer-events-none" />
               <Image
                 src="/Logo.jpg"
                 alt="Plenna Estética e Emagrecimento"
-                width={440}
-                height={200}
-                className="w-full h-auto"
+                width={500}
+                height={250}
+                className="w-full h-auto drop-shadow-sm"
                 priority
               />
             </motion.div>
@@ -227,67 +227,60 @@ export default function Home() {
             {/* Badge */}
             <motion.div
               variants={fadeUp}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full mb-5"
-              style={{ background: "rgba(232,180,194,0.12)" }}
+              className="flex items-center gap-2 px-5 py-2 rounded-full mb-6 bg-white shadow-sm border border-plenna-pink/10"
             >
-              <Sparkles size={13} style={{ color: "#E8B4C2" }} />
-              <span
-                className="text-[11px] font-bold uppercase tracking-widest"
-                style={{ color: "#E8B4C2" }}
-              >
-                Especialista em Transformação Corporal
+              <Sparkles size={14} className="text-plenna-pink animate-pulse" />
+              <span className="text-[12px] font-bold uppercase tracking-widest text-plenna-pink">
+                Transformação Corporal Avançada
               </span>
             </motion.div>
 
             {/* Headline */}
             <motion.h1
               variants={fadeUp}
-              className="text-[30px] font-bold text-center leading-tight mb-3"
-              style={{ fontFamily: "var(--font-poppins)" }}
+              className="text-[34px] font-bold text-center leading-[1.1] mb-4"
+              style={{ color: "#1A1A1A" }}
             >
-              Resultados Reais.{" "}
-              <span style={{ color: "#E8B4C2" }}>Autoestima de Volta.</span>
+              Sua melhor versão <br />
+              <span className="text-plenna-pink relative inline-block">
+                começa aqui.
+                <svg className="absolute -bottom-1 left-0 w-full h-2 text-plenna-pink/20" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="4" />
+                </svg>
+              </span>
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
-              className="text-gray-500 text-[15px] text-center max-w-[300px] leading-relaxed mb-8"
+              className="text-gray-500 text-[16px] text-center max-w-[320px] leading-relaxed mb-10"
             >
-              Protocolos avançados para lipedema, gordura localizada, diástase e
-              muito mais.
+              Protocolos exclusivos para lipedema, gordura localizada e emagrecimento saudável.
             </motion.p>
 
-            {/* CTAs */}
+            {/* CTAs - More vibrant */}
             <motion.div
               variants={fadeUp}
-              className="w-full flex flex-col gap-3"
+              className="w-full flex flex-col gap-4"
             >
               <a
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl font-semibold text-[16px] text-white transition-all duration-300 active:scale-95"
+                className="group flex items-center justify-center gap-3 w-full py-5 rounded-2xl font-bold text-[17px] text-white transition-all duration-500 hover:brightness-110 active:scale-[0.98]"
                 style={{
-                  background:
-                    "linear-gradient(135deg, #E8B4C2 0%, #D89EB0 100%)",
-                  boxShadow: "0 8px 24px rgba(232,180,194,0.45)",
-                  fontFamily: "var(--font-poppins)",
+                  background: "linear-gradient(135deg, var(--plenna-pink) 0%, var(--plenna-pink-hover) 100%)",
+                  boxShadow: "0 12px 30px rgba(255,107,157,0.4)",
                 }}
               >
-                <Calendar size={20} strokeWidth={2.5} />
-                Agende sua Avaliação Gratuita
+                <Calendar size={20} strokeWidth={2.5} className="group-hover:rotate-12 transition-transform" />
+                Agendar Avaliação Gratuita
               </a>
 
               <a
                 href="#tratamentos"
-                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-semibold text-[15px] transition-all duration-300 border-2 active:scale-95"
-                style={{
-                  borderColor: "#E5C8A0",
-                  color: "#E5C8A0",
-                  fontFamily: "var(--font-poppins)",
-                }}
+                className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-[15px] transition-all duration-300 border-2 border-plenna-gold text-plenna-gold bg-white hover:bg-plenna-gold-soft active:scale-[0.98]"
               >
-                Ver Tratamentos
+                Conhecer Procedimentos
               </a>
             </motion.div>
           </motion.div>
@@ -296,67 +289,53 @@ export default function Home() {
         {/* ════════════════════════════════════════
             SOBRE
         ════════════════════════════════════════ */}
-        <section className="px-6 py-8" style={{ background: "#FAF7F4" }}>
+        {/* ════════════════════════════════════════
+            A CLÍNICA - CONCEITO & EXPERIÊNCIA
+        ════════════════════════════════════════ */}
+        <section className="px-6 py-12 bg-white relative">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-plenna-gold/5 rounded-full blur-3xl" />
+          
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-3xl p-6 shadow-sm"
-            style={{ border: "1px solid rgba(232,180,194,0.15)" }}
+            className="relative z-10"
           >
-            <div className="flex items-start gap-4">
-              <div
-                className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #E8B4C2 0%, #E5C8A0 100%)",
-                }}
-              >
-                <Heart size={22} className="text-white" strokeWidth={2} />
-              </div>
-              <div>
-                <h2
-                  className="text-[18px] font-bold mb-2"
-                  style={{ fontFamily: "var(--font-poppins)" }}
-                >
-                  Plenna Estética
-                </h2>
-                <p className="text-[14px] text-gray-600 leading-relaxed">
-                  Especializada em{" "}
-                  <strong className="text-[#2C2C2C]">cuidado humanizado</strong>
-                  , a Plenna une tecnologia de ponta e técnicas avançadas para
-                  devolver sua autoestima com{" "}
-                  <strong className="text-[#2C2C2C]">
-                    resultados que você pode ver e sentir
-                  </strong>
-                  .
-                </p>
-              </div>
+            <div className="flex flex-col items-center mb-8">
+               <div className="w-16 h-1 flex bg-plenna-gold/30 rounded-full mb-4" />
+               <h2 className="text-[24px] font-bold text-center">A Clínica</h2>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-3 mt-5 pt-5 border-t border-gray-100">
-              {[
-                { value: "500+", label: "Pacientes" },
-                { value: "4+", label: "Anos" },
-                { value: "98%", label: "Satisfação" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <div
-                    className="text-[24px] font-bold"
-                    style={{
-                      color: "#E8B4C2",
-                      fontFamily: "var(--font-poppins)",
-                    }}
-                  >
-                    {s.value}
-                  </div>
-                  <div className="text-[11px] text-gray-400 font-semibold uppercase tracking-wide mt-0.5">
-                    {s.label}
-                  </div>
+            <div className="bg-plenna-soft/50 rounded-[32px] p-8 border border-plenna-pink/10 shadow-sm mb-10">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="w-12 h-12 rounded-2xl bg-plenna-pink flex items-center justify-center shadow-lg shadow-plenna-pink/20">
+                  <Heart size={24} className="text-white" fill="white" />
                 </div>
-              ))}
+                <h3 className="text-[20px] font-bold">Cuidado que Transforma</h3>
+              </div>
+              
+              <p className="text-[15px] text-gray-700 leading-relaxed mb-8">
+                Na <span className="font-bold text-plenna-pink">Plenna Estética</span>, não tratamos apenas o corpo, cuidamos da sua autoestima. 
+                Com um ambiente exclusivo e tecnologia de ponta, oferecemos um atendimento humanizado para que você se sinta acolhida em cada etapa da sua jornada.
+              </p>
+
+              {/* Stats - More visual */}
+              <div className="grid grid-cols-3 gap-4 py-8 border-y border-plenna-pink/10">
+                {[
+                  { value: "+500", label: "Vidas Transf." },
+                  { value: "4 Anos", label: "Experiência" },
+                  { value: "Selo", label: "Excelência" },
+                ].map((s) => (
+                  <div key={s.label} className="text-center">
+                    <div className="text-[19px] font-bold text-plenna-pink mb-1">
+                      {s.value}
+                    </div>
+                    <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                      {s.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </section>
@@ -437,64 +416,50 @@ export default function Home() {
         {/* ════════════════════════════════════════
             ANTES & DEPOIS
         ════════════════════════════════════════ */}
-        <section className="py-8" style={{ background: "#FAF7F4" }}>
+        {/* ════════════════════════════════════════
+            RESULTADOS - ANTES & DEPOIS
+        ════════════════════════════════════════ */}
+        <section className="py-16 bg-plenna-soft/40 relative">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-5 px-6"
+            className="text-center mb-8 px-6"
           >
-            <span
-              className="text-[11px] font-bold uppercase tracking-widest"
-              style={{ color: "#E5C8A0" }}
-            >
-              Transformações reais
-            </span>
-            <h2
-              className="text-[22px] font-bold mt-1"
-              style={{ fontFamily: "var(--font-poppins)" }}
-            >
-              Antes &amp; Depois
-            </h2>
+             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-plenna-gold/10 text-plenna-gold text-[12px] font-bold mb-3">
+              <Sparkles size={14} /> RESULTADOS REAIS
+             </div>
+            <h2 className="text-[28px] font-bold">Nossas Transformações</h2>
           </motion.div>
 
-          {/* Tabs */}
-          <div className="flex gap-2 px-6 mb-5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
+          {/* Tabs - Styled for Vibrancy */}
+          <div className="flex gap-2 px-6 mb-8 overflow-x-auto pb-2 no-scrollbar">
             {galleryTabs.map((tab, i) => (
               <button
                 key={tab.label}
                 onClick={() => changeTab(i)}
                 className={clsx(
-                  "shrink-0 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-300",
+                  "shrink-0 px-6 py-2.5 rounded-full text-[14px] font-bold transition-all duration-500",
                   activeTab === i
-                    ? "text-white shadow-md"
-                    : "bg-white text-gray-500 border border-gray-200"
+                    ? "bg-plenna-pink text-white shadow-[0_8px_20px_rgba(255,77,141,0.3)] scale-105"
+                    : "bg-white text-gray-400 border border-gray-100"
                 )}
-                style={
-                  activeTab === i
-                    ? {
-                        background:
-                          "linear-gradient(135deg, #E8B4C2, #D89EB0)",
-                        boxShadow: "0 4px 12px rgba(232,180,194,0.4)",
-                      }
-                    : {}
-                }
               >
                 {tab.label}
               </button>
             ))}
           </div>
 
-          {/* Carousel */}
+          {/* Carousel with Better Borders */}
           <div className="px-6">
-            <div className="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100 shadow-lg">
+            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[40px] border-[8px] border-white shadow-2xl bg-white">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${activeTab}-${activeSlide}`}
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -40 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
                   className="absolute inset-0"
                 >
                   <Image
@@ -504,53 +469,92 @@ export default function Home() {
                     className="object-cover"
                     sizes="(max-width: 480px) 100vw, 440px"
                   />
-                  {/* Caption overlay */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent px-5 py-4 pt-16">
-                    <div className="flex items-center justify-between">
-                      <span className="text-white text-[13px] font-semibold">
-                        {currentImages[activeSlide].caption}
-                      </span>
-                      <span className="text-white/70 text-[12px]">
-                        {activeSlide + 1}/{currentImages.length}
-                      </span>
-                    </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                  
+                  <div className="absolute inset-x-0 bottom-0 p-8 pb-10">
+                    <span className="inline-block px-3 py-1 rounded-full bg-plenna-pink/90 text-[11px] font-bold text-white mb-2 uppercase tracking-widest">
+                      {galleryTabs[activeTab].label}
+                    </span>
+                    <h4 className="text-white text-[18px] font-bold leading-tight">
+                      {currentImages[activeSlide].caption}
+                    </h4>
                   </div>
                 </motion.div>
               </AnimatePresence>
 
-              {/* Prev/Next buttons */}
-              <button
-                onClick={prevSlide}
-                aria-label="Imagem anterior"
-                className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 p-2.5 rounded-full shadow-md z-10 active:scale-90 transition-transform"
-                style={{ color: "#E8B4C2" }}
-              >
-                <ChevronLeft size={18} strokeWidth={2.5} />
-              </button>
-              <button
-                onClick={nextSlide}
-                aria-label="Próxima imagem"
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 p-2.5 rounded-full shadow-md z-10 active:scale-90 transition-transform"
-                style={{ color: "#E8B4C2" }}
-              >
-                <ChevronRight size={18} strokeWidth={2.5} />
-              </button>
+              {/* Navigation */}
+              <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-4 z-10">
+                <button
+                  onClick={prevSlide}
+                  className="w-11 h-11 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-plenna-pink shadow-lg active:scale-90 transition-transform"
+                >
+                  <ChevronLeft size={24} strokeWidth={3} />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="w-11 h-11 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-plenna-pink shadow-lg active:scale-90 transition-transform"
+                >
+                  <ChevronRight size={24} strokeWidth={3} />
+                </button>
+              </div>
 
-              {/* Dot indicators */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-                {currentImages.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveSlide(i)}
-                    className={clsx(
-                      "h-1.5 rounded-full transition-all duration-300",
-                      activeSlide === i ? "w-5 bg-white" : "w-1.5 bg-white/50"
-                    )}
-                  />
-                ))}
+              {/* Counter */}
+              <div className="absolute top-6 right-6 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full text-[12px] text-white/90 font-bold z-10 border border-white/20">
+                {activeSlide + 1} / {currentImages.length}
               </div>
             </div>
           </div>
+        </section>
+
+        {/* ════════════════════════════════════════
+            A DOUTORA - DRA. RITA 
+        ════════════════════════════════════════ */}
+        <section className="px-6 py-20 bg-white relative overflow-hidden">
+          <div className="absolute -left-20 top-0 w-64 h-64 bg-plenna-gold/10 rounded-full blur-[80px]" />
+          
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative z-10"
+          >
+            <div className="flex flex-col items-center text-center mb-10">
+              <span className="text-plenna-pink font-extrabold tracking-[0.2em] text-[11px] uppercase mb-4 py-1.5 px-4 bg-plenna-pink/10 rounded-full">
+                Especialista
+              </span>
+              <h2 className="text-[32px] font-bold leading-none mb-2">Dra. Rita</h2>
+              <p className="text-plenna-gold font-semibold uppercase tracking-widest text-[12px]">
+                Plenna Estética & Emagrecimento
+              </p>
+            </div>
+
+            {/* Doctor Photo Showcase */}
+            <div className="grid grid-cols-2 gap-3 mb-12">
+               {doctorPhotos.slice(0, 2).map((photo, i) => (
+                 <div key={i} className={clsx(
+                   "relative overflow-hidden rounded-[30px] border-4 border-plenna-gold-soft shadow-xl",
+                   i === 0 ? "aspect-[3/4]" : "aspect-[3/4] translate-y-8"
+                 )}>
+                   <Image
+                     src={photo.src}
+                     alt={photo.alt}
+                     fill
+                     className="object-cover"
+                   />
+                 </div>
+               ))}
+            </div>
+
+            <div className="mt-16 bg-plenna-gold-soft/40 p-8 rounded-[40px] border border-plenna-gold/20">
+               <p className="text-[17px] text-gray-800 leading-relaxed font-medium italic">
+                 &ldquo;Minha missão é ajudar cada mulher a reencontrar sua melhor versão, unindo ciência, tecnologia e um olhar humanizado sobre a beleza.&rdquo;
+               </p>
+               <div className="mt-6 flex items-center gap-3">
+                  <div className="w-10 h-[2px] bg-plenna-gold" />
+                  <span className="text-[14px] font-bold text-plenna-gold uppercase tracking-widest">Rita Vasconcelos</span>
+               </div>
+            </div>
+          </motion.div>
         </section>
 
         {/* ════════════════════════════════════════
@@ -671,79 +675,71 @@ export default function Home() {
         {/* ════════════════════════════════════════
             FOOTER / CONTATO
         ════════════════════════════════════════ */}
-        <footer className="px-6 py-8 bg-white">
-          {/* Location card */}
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=Av.+Rio+Grande+do+Sul,+517+-+Centro,+Divinópolis+-+MG"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-4 w-full p-4 rounded-2xl mb-5 border border-gray-100 transition-all duration-300 hover:border-[#7BC8C1] active:scale-95"
-            style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
-          >
-            <div
-              className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
-              style={{
-                background: "linear-gradient(135deg, #7BC8C1 0%, #5BB5AE 100%)",
-              }}
-            >
-              <MapPin size={20} className="text-white" strokeWidth={2} />
+        {/* ════════════════════════════════════════
+            CONTATO & LOCALIZAÇÃO
+        ════════════════════════════════════════ */}
+        <footer className="px-6 pt-12 pb-8 bg-plenna-soft/50 border-t border-plenna-pink/5">
+          <div className="bg-white rounded-[40px] p-8 shadow-xl shadow-plenna-pink/5 border border-plenna-pink/5 mb-10 text-center">
+            <div className="w-16 h-16 rounded-full bg-plenna-pink shadow-lg shadow-plenna-pink/30 flex items-center justify-center mx-auto mb-6">
+              <MapPin size={30} className="text-white" />
             </div>
-            <div className="flex-1">
-              <h4 className="font-semibold text-[14px] text-[#2C2C2C]">
-                Clínica Plenna
-              </h4>
-              <p className="text-[12px] text-gray-500 mt-0.5">
-                Av. Rio Grande do Sul, 517 — Centro
-                <br />
-                Divinópolis - MG
-              </p>
-            </div>
-            <ChevronRight size={16} className="text-gray-300" />
-          </a>
+            
+            <h4 className="text-[22px] font-bold mb-3">Visite nossa Clínica</h4>
+            <p className="text-gray-500 text-[14px] leading-relaxed mb-8">
+              Av. Rio Grande do Sul, 517 — Centro <br />
+              <span className="font-bold">Divinópolis - MG</span>
+            </p>
 
-          {/* Social buttons */}
-          <div className="flex gap-3 mb-8">
             <a
-              href={INSTAGRAM_LINK}
+              href="https://www.google.com/maps/search/?api=1&query=Av.+Rio+Grande+do+Sul,+517+-+Centro,+Divinópolis+-+MG"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl border-2 font-semibold text-[14px] transition-all duration-300 active:scale-95"
-              style={{ borderColor: "#E8B4C2", color: "#E8B4C2" }}
+              className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-plenna-teal text-white font-bold text-[15px] shadow-lg shadow-plenna-teal/20 transition-transform active:scale-95"
             >
-              <InstagramIcon size={18} />
-              Instagram
-            </a>
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-[14px] text-white transition-all duration-300 active:scale-95"
-              style={{
-                background: "#25D366",
-                boxShadow: "0 4px 15px rgba(37,211,102,0.35)",
-              }}
-            >
-              <MessageCircle size={18} strokeWidth={2} />
-              WhatsApp
+              Abrir no Google Maps
             </a>
           </div>
 
-          {/* Logo + copyright */}
-          <div className="text-center pt-5 border-t border-gray-100">
-            <div className="w-24 mx-auto mb-3 opacity-50">
+          <div className="flex flex-col gap-4 mb-12">
+            <h5 className="text-center text-[12px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-2">Conecte-se conosco</h5>
+            <div className="flex gap-3">
+              <a
+                href={INSTAGRAM_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl bg-white border border-plenna-pink/20 font-bold text-[14px] text-plenna-pink shadow-sm transition-all active:scale-95"
+              >
+                <InstagramIcon size={20} />
+                Instagram
+              </a>
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl bg-[#25D366] font-bold text-[14px] text-white shadow-lg shadow-green-500/20 transition-all active:scale-95"
+              >
+                <MessageCircle size={20} strokeWidth={2} />
+                WhatsApp
+              </a>
+            </div>
+          </div>
+
+          {/* Logo Final - Made Alive */}
+          <div className="text-center pt-8 border-t border-gray-100 flex flex-col items-center">
+            <div className="w-28 opacity-90 mb-5 brightness-110 contrast-125">
               <Image
                 src="/Logo.jpg"
                 alt="Plenna Estética"
-                width={96}
-                height={48}
+                width={120}
+                height={60}
                 className="w-full h-auto"
               />
             </div>
-            <p className="text-[11px] text-gray-400 font-medium">
+            <p className="text-[12px] text-gray-400 font-semibold mb-1">
               © {new Date().getFullYear()} Plenna Estética e Emagrecimento
             </p>
-            <p className="text-[11px] text-gray-300 mt-1 italic">
-              A beleza de ser você.
+            <p className="text-[11px] text-plenna-pink/60 font-medium italic">
+              Realizando o seu sonho de se sentir Plenna.
             </p>
           </div>
         </footer>
