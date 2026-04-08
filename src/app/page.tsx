@@ -93,35 +93,17 @@ const treatments = [
   },
 ];
 
-const galleryTabs = [
-  {
-    label: "Resultados",
-    images: [
-      { src: "/lipedema-1.jpg", caption: "Transformação Lipedema" },
-      { src: "/seca-barriga-1.jpg", caption: "Protocolo Seca Barriga" },
-      { src: "/lipedema-2.jpg", caption: "Redução Corporal" },
-      { src: "/seca-barriga-2.jpg", caption: "Resultado Estético" },
-    ],
-  },
-  {
-    label: "Lipedema",
-    images: [
-      { src: "/lipedema-1.jpg", caption: "Lipedema + Emagrecimento" },
-      { src: "/lipedema-2.jpg", caption: "Lipedema + Emagrecimento" },
-      { src: "/lipedema-3.jpg", caption: "Lipedema + Emagrecimento" },
-    ],
-  },
-  {
-    label: "Seca Barriga",
-    images: [
-      { src: "/seca-barriga-1.jpg", caption: "Protocolo Seca Barriga" },
-      { src: "/seca-barriga-2.jpg", caption: "Protocolo Seca Barriga" },
-      { src: "/seca-barriga-3.jpg", caption: "Protocolo Seca Barriga" },
-      { src: "/crio-power-1.jpg", caption: "Seca Barriga Crio Power" },
-      { src: "/enzimatico-1.jpg", caption: "Seca Barriga Enzimático" },
-    ],
-  },
+const resultsGallery = [
+  { src: "/lipedema-1.jpg", caption: "Transformação Lipedema" },
+  { src: "/seca-barriga-1.jpg", caption: "Protocolo Seca Barriga" },
+  { src: "/lipedema-2.jpg", caption: "Redução Corporal" },
+  { src: "/seca-barriga-2.jpg", caption: "Resultado Estético" },
+  { src: "/lipedema-3.jpg", caption: "Lipedema + Emagrecimento" },
+  { src: "/seca-barriga-3.jpg", caption: "Protocolo Seca Barriga" },
+  { src: "/crio-power-1.jpg", caption: "Seca Barriga Crio Power" },
+  { src: "/enzimatico-1.jpg", caption: "Seca Barriga Enzimático" },
 ];
+
 
 const testimonials = [
   {
@@ -152,21 +134,14 @@ const doctorPhotos = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Home() {
-  const [activeTab, setActiveTab] = useState(0);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const currentImages = galleryTabs[activeTab].images;
-
   const nextSlide = () =>
-    setActiveSlide((p) => (p === currentImages.length - 1 ? 0 : p + 1));
+    setActiveSlide((p) => (p === resultsGallery.length - 1 ? 0 : p + 1));
 
   const prevSlide = () =>
-    setActiveSlide((p) => (p === 0 ? currentImages.length - 1 : p - 1));
+    setActiveSlide((p) => (p === 0 ? resultsGallery.length - 1 : p - 1));
 
-  const changeTab = (i: number) => {
-    setActiveTab(i);
-    setActiveSlide(0);
-  };
 
   return (
     <main className="min-h-screen bg-[#FAF7F4] font-sans text-[#2C2C2C] selection:bg-[#E8B4C2] selection:text-white">
@@ -219,8 +194,7 @@ export default function Home() {
                 alt="Plenna Estética e Emagrecimento"
                 width={500}
                 height={250}
-                className="w-full h-auto drop-shadow-sm brightness-110 contrast-125"
-                style={{ mixBlendMode: 'screen' }}
+                className="w-full h-auto drop-shadow-md brightness-110 contrast-125"
                 priority
               />
             </motion.div>
@@ -430,33 +404,15 @@ export default function Home() {
              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-plenna-gold/10 text-plenna-gold text-[12px] font-bold mb-3">
               <Sparkles size={14} /> RESULTADOS REAIS
              </div>
-            <h2 className="text-[28px] font-bold">Nossas Transformações</h2>
+            <h2 className="text-[28px] font-bold">Resultados</h2>
           </motion.div>
-
-          {/* Tabs - Styled for Vibrancy */}
-          <div className="flex gap-2 px-6 mb-8 overflow-x-auto pb-2 no-scrollbar">
-            {galleryTabs.map((tab, i) => (
-              <button
-                key={tab.label}
-                onClick={() => changeTab(i)}
-                className={clsx(
-                  "shrink-0 px-6 py-2.5 rounded-full text-[14px] font-bold transition-all duration-500",
-                  activeTab === i
-                    ? "bg-plenna-pink text-white shadow-[0_8px_20px_rgba(255,77,141,0.3)] scale-105"
-                    : "bg-white text-gray-400 border border-gray-100"
-                )}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
 
           {/* Carousel with Better Borders */}
           <div className="px-6">
             <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[40px] border-[8px] border-white shadow-2xl bg-white">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={`${activeTab}-${activeSlide}`}
+                  key={activeSlide}
                   initial={{ opacity: 0, scale: 1.1 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
@@ -464,8 +420,8 @@ export default function Home() {
                   className="absolute inset-0"
                 >
                   <Image
-                    src={currentImages[activeSlide].src}
-                    alt={currentImages[activeSlide].caption}
+                    src={resultsGallery[activeSlide].src}
+                    alt={resultsGallery[activeSlide].caption}
                     fill
                     className="object-cover"
                     sizes="(max-width: 480px) 100vw, 440px"
@@ -473,11 +429,8 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                   
                   <div className="absolute inset-x-0 bottom-0 p-8 pb-10">
-                    <span className="inline-block px-3 py-1 rounded-full bg-plenna-pink/90 text-[11px] font-bold text-white mb-2 uppercase tracking-widest">
-                      {galleryTabs[activeTab].label}
-                    </span>
                     <h4 className="text-white text-[18px] font-bold leading-tight">
-                      {currentImages[activeSlide].caption}
+                      {resultsGallery[activeSlide].caption}
                     </h4>
                   </div>
                 </motion.div>
@@ -501,7 +454,7 @@ export default function Home() {
 
               {/* Counter */}
               <div className="absolute top-6 right-6 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full text-[12px] text-white/90 font-bold z-10 border border-white/20">
-                {activeSlide + 1} / {currentImages.length}
+                {activeSlide + 1} / {resultsGallery.length}
               </div>
             </div>
           </div>
@@ -734,7 +687,6 @@ export default function Home() {
                 width={120}
                 height={60}
                 className="w-full h-auto brightness-110 contrast-125"
-                style={{ mixBlendMode: 'screen' }}
               />
             </div>
             <p className="text-[12px] text-gray-400 font-semibold mb-1">
