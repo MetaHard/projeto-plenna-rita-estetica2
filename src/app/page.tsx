@@ -36,7 +36,7 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
     </svg>
   );
 }
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clsx from "clsx";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -108,19 +108,19 @@ const resultsGallery = [
 const testimonials = [
   {
     name: "Ana Carolina",
-    text: "Incrível! Já na primeira sessão de seca barriga senti a diferença. A Dra. Rita é extremamente cuidadosa e atenciosa. Resultado maravilhoso!",
+    text: "Incrível! Já na primeira sessão de seca barriga senti a diferença. A Dra. Rita Plenna é extremamente profissional, cuidadosa e atenciosa. O ambiente da clínica é muito acolhedor — me senti em casa desde o primeiro momento. Resultado maravilhoso!",
     stars: 5,
     treatment: "Seca Barriga",
   },
   {
     name: "Fernanda Lima",
-    text: "Finalmente encontrei um tratamento eficaz para o meu lipedema. Resultados visíveis desde o início! Recomendo demais para todas.",
+    text: "Finalmente encontrei um tratamento eficaz para o meu lipedema. A Dra. Rita Plenna tem um conhecimento profundo e uma dedicação que impressiona. O espaço é lindo, aconchegante, e o atendimento é de alto nível. Resultados visíveis desde o início! Recomendo demais.",
     stars: 5,
     treatment: "Lipedema",
   },
   {
     name: "Mariana Costa",
-    text: "O ambiente da clínica é lindo e o atendimento impecável. Minha autoestima voltou completamente. Obrigada Plenna!",
+    text: "A clínica transmite acolhimento desde a entrada. O ambiente é elegante e tranquilo, e a Dra. Rita Plenna é super profissional e humanizada — ela realmente se importa com cada paciente. Minha autoestima voltou completamente. Obrigada, Plenna!",
     stars: 5,
     treatment: "Gordura Localizada",
   },
@@ -135,6 +135,15 @@ const doctorPhotos = [
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const el = document.querySelector(".page-scroll-container");
+    if (!el) return;
+    const handler = () => setScrolled(el.scrollTop > 40);
+    el.addEventListener("scroll", handler);
+    return () => el.removeEventListener("scroll", handler);
+  }, []);
 
   const nextSlide = () =>
     setActiveSlide((p) => (p === resultsGallery.length - 1 ? 0 : p + 1));
@@ -160,52 +169,109 @@ export default function Home() {
         <MessageCircle size={28} fill="white" strokeWidth={0} />
       </a>
 
-      <div className="max-w-[480px] mx-auto bg-white min-h-screen shadow-sm overflow-hidden">
+      <div className="max-w-[480px] mx-auto bg-white min-h-screen shadow-sm overflow-hidden page-scroll-container" style={{ overflowY: "auto", height: "100vh" }}>
+
+        {/* ── Sticky Header ── */}
+        <header
+          className={clsx(
+            "sticky top-0 z-40 transition-all duration-300",
+            scrolled
+              ? "bg-white/95 backdrop-blur-md shadow-md border-b border-plenna-pink/10"
+              : "bg-transparent"
+          )}
+        >
+          <div className="flex items-center justify-between px-5 py-3">
+            {/* Logo */}
+            <div className={clsx("w-28 transition-all duration-300", scrolled ? "opacity-100" : "opacity-0 pointer-events-none")}>
+              <Image
+                src="/logo-sem-fundo.jpg"
+                alt="Plenna Estética"
+                width={220}
+                height={100}
+                className="w-full h-auto brightness-110 contrast-125"
+              />
+            </div>
+
+            {/* Nav links - only when scrolled */}
+            <nav className={clsx("flex items-center gap-1 transition-all duration-300 text-[12px] font-semibold text-gray-500", scrolled ? "opacity-100" : "opacity-0")}>
+              <a href="#tratamentos" className="px-2 py-1 hover:text-plenna-pink transition-colors">Serviços</a>
+              <a href="#doutora" className="px-2 py-1 hover:text-plenna-pink transition-colors">Doutora</a>
+            </nav>
+
+            {/* CTA button */}
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={clsx(
+                "flex items-center gap-1.5 px-4 py-2 rounded-full text-[12px] font-bold text-white transition-all duration-300",
+                scrolled
+                  ? "bg-plenna-pink shadow-md shadow-plenna-pink/30 opacity-100"
+                  : "bg-white/20 backdrop-blur-sm border border-white/40 opacity-0 pointer-events-none"
+              )}
+            >
+              <Calendar size={13} strokeWidth={2.5} />
+              Agendar
+            </a>
+          </div>
+        </header>
 
         {/* ════════════════════════════════════════
-            HERO
+            HERO - FOTO COM TEXTO SOBREPOSTO
         ════════════════════════════════════════ */}
-        {/* ════════════════════════════════════════
-            HERO - IDENTIDADE & IMPACTO
-        ════════════════════════════════════════ */}
-        <section
-          className="relative flex flex-col items-center pt-14 pb-12 px-6 overflow-hidden"
-          style={{
-            background: "linear-gradient(180deg, var(--plenna-pink-soft) 0%, #ffffff 100%)",
-          }}
-        >
-          {/* Decorative Elements */}
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white/40 to-transparent pointer-events-none" />
-          
+        <section className="relative w-full" style={{ minHeight: 560 }}>
+          {/* Foto full-width da doutora */}
+          <motion.div
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="absolute inset-0"
+          >
+            <Image
+              src="/doutora-1.jpg"
+              alt="Dra. Rita Plenna — Especialista em Estética Corporal"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+          </motion.div>
+
+          {/* Gradiente escuro de baixo para cima (estilo premium) */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(10,5,15,0.92) 0%, rgba(10,5,15,0.55) 45%, rgba(10,5,15,0.10) 100%)",
+            }}
+          />
+
+          {/* Logo no topo — área não scrollada */}
+          <div className="absolute top-0 left-0 right-0 flex justify-center pt-4 z-10">
+            <div className="w-32 bg-white/15 backdrop-blur-sm rounded-[20px] px-3 py-2 border border-white/20">
+              <Image
+                src="/logo-sem-fundo.jpg"
+                alt="Plenna Estética"
+                width={220}
+                height={100}
+                className="w-full h-auto brightness-200 contrast-110"
+              />
+            </div>
+          </div>
+
+          {/* Conteúdo sobreposto — parte inferior */}
           <motion.div
             initial="hidden"
             animate="show"
             variants={stagger}
-            className="flex flex-col items-center w-full relative z-10"
+            className="absolute inset-x-0 bottom-0 px-6 pb-10 z-10"
           >
-            {/* Logo Container - Made more visible/alive */}
-            <motion.div 
-              variants={fadeUp} 
-              className="relative w-56 mb-10 p-4 rounded-[40px] bg-white shadow-[0_20px_50px_rgba(255,77,141,0.15)] border border-white"
-            >
-              <div className="absolute inset-0 rounded-[40px] bg-gradient-to-tr from-plenna-pink/5 to-transparent pointer-events-none" />
-              <Image
-                src="/logo-sem-fundo.jpg"
-                alt="Plenna Estética e Emagrecimento"
-                width={500}
-                height={250}
-                className="w-full h-auto drop-shadow-md brightness-110 contrast-125"
-                priority
-              />
-            </motion.div>
-
             {/* Badge */}
             <motion.div
               variants={fadeUp}
-              className="flex items-center gap-2 px-5 py-2 rounded-full mb-6 bg-white shadow-sm border border-plenna-pink/10"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 border border-plenna-pink/50 bg-plenna-pink/20 backdrop-blur-sm"
             >
-              <Sparkles size={14} className="text-plenna-pink animate-pulse" />
-              <span className="text-[12px] font-bold uppercase tracking-widest text-plenna-pink">
+              <Sparkles size={12} className="text-plenna-pink" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-white/90">
                 Transformação Corporal Avançada
               </span>
             </motion.div>
@@ -213,47 +279,50 @@ export default function Home() {
             {/* Headline */}
             <motion.h1
               variants={fadeUp}
-              className="text-[34px] font-bold text-center leading-[1.1] mb-4"
-              style={{ color: "#1A1A1A" }}
+              className="text-[38px] font-bold leading-[1.05] mb-3 text-white"
             >
-              Sua melhor versão <br />
-              <span className="text-plenna-pink relative inline-block">
+              Sua melhor <br />
+              versão{" "}
+              <span
+                className="relative inline-block"
+                style={{ color: "#FFB3CC" }}
+              >
                 começa aqui.
-                <svg className="absolute -bottom-1 left-0 w-full h-2 text-plenna-pink/20" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="4" />
-                </svg>
               </span>
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
-              className="text-gray-500 text-[16px] text-center max-w-[320px] leading-relaxed mb-10"
+              className="text-white/70 text-[14px] leading-relaxed mb-8 max-w-[300px]"
             >
-              Protocolos exclusivos para lipedema, gordura localizada e emagrecimento saudável.
+              Protocolos exclusivos para lipedema, gordura localizada e emagrecimento saudável com a{" "}
+              <span className="text-white font-semibold">Dra. Rita Plenna.</span>
             </motion.p>
 
-            {/* CTAs - More vibrant */}
-            <motion.div
-              variants={fadeUp}
-              className="w-full flex flex-col gap-4"
-            >
+            {/* CTAs */}
+            <motion.div variants={fadeUp} className="flex flex-col gap-3">
               <a
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-3 w-full py-5 rounded-2xl font-bold text-[17px] text-white transition-all duration-500 hover:brightness-110 active:scale-[0.98]"
+                className="group flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-bold text-[16px] text-white active:scale-[0.98] transition-all"
                 style={{
-                  background: "linear-gradient(135deg, var(--plenna-pink) 0%, var(--plenna-pink-hover) 100%)",
-                  boxShadow: "0 12px 30px rgba(255,107,157,0.4)",
+                  background:
+                    "linear-gradient(135deg, var(--plenna-pink) 0%, var(--plenna-pink-hover) 100%)",
+                  boxShadow: "0 10px 28px rgba(255,77,141,0.45)",
                 }}
               >
-                <Calendar size={20} strokeWidth={2.5} className="group-hover:rotate-12 transition-transform" />
+                <Calendar
+                  size={19}
+                  strokeWidth={2.5}
+                  className="group-hover:rotate-12 transition-transform"
+                />
                 Agendar Avaliação Gratuita
               </a>
 
               <a
                 href="#tratamentos"
-                className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-bold text-[15px] transition-all duration-300 border-2 border-plenna-gold text-plenna-gold bg-white hover:bg-plenna-gold-soft active:scale-[0.98]"
+                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-bold text-[14px] transition-all border border-white/30 text-white bg-white/10 backdrop-blur-sm active:scale-[0.98]"
               >
                 Conhecer Procedimentos
               </a>
@@ -294,21 +363,40 @@ export default function Home() {
                 Com um ambiente exclusivo e tecnologia de ponta, oferecemos um atendimento humanizado para que você se sinta acolhida em cada etapa da sua jornada.
               </p>
 
-              {/* Stats - More visual */}
-              <div className="grid grid-cols-3 gap-4 py-8 border-y border-plenna-pink/10">
+              {/* Stats - Circular Counters (inspiração referência) */}
+              <div className="grid grid-cols-3 gap-3 py-8 border-y border-plenna-pink/10">
                 {[
-                  { value: "+500", label: "Vidas Transf." },
-                  { value: "4 Anos", label: "Experiência" },
-                  { value: "Selo", label: "Excelência" },
+                  { value: "+1.500", label: "Vidas\nTransformadas", color: "#FF4D8D", ring: "rgba(255,77,141,0.18)" },
+                  { value: "20+", label: "Anos de\nExperiência", color: "#D4AF37", ring: "rgba(212,175,55,0.18)" },
+                  { value: "100%", label: "Satisfação\ndas Pacientes", color: "#00A69C", ring: "rgba(0,166,156,0.18)" },
                 ].map((s) => (
-                  <div key={s.label} className="text-center">
-                    <div className="text-[19px] font-bold text-plenna-pink mb-1">
-                      {s.value}
+                  <motion.div
+                    key={s.label}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 120 }}
+                    className="flex flex-col items-center"
+                  >
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center mb-2 relative"
+                      style={{ background: s.ring, border: `2.5px solid ${s.color}30` }}
+                    >
+                      <div
+                        className="absolute inset-0 rounded-full"
+                        style={{
+                          background: `conic-gradient(${s.color} 80%, transparent 80%)`,
+                          opacity: 0.15,
+                        }}
+                      />
+                      <span className="text-[15px] font-extrabold relative z-10" style={{ color: s.color }}>
+                        {s.value}
+                      </span>
                     </div>
-                    <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wide text-center whitespace-pre-line leading-tight">
                       {s.label}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -461,9 +549,9 @@ export default function Home() {
         </section>
 
         {/* ════════════════════════════════════════
-            A DOUTORA - DRA. RITA 
+            A DOUTORA - DRA. RITA
         ════════════════════════════════════════ */}
-        <section className="px-6 py-20 bg-white relative overflow-hidden">
+        <section id="doutora" className="px-6 py-20 bg-white relative overflow-hidden">
           <div className="absolute -left-20 top-0 w-64 h-64 bg-plenna-gold/10 rounded-full blur-[80px]" />
           
           <motion.div
@@ -476,7 +564,7 @@ export default function Home() {
               <span className="text-plenna-pink font-extrabold tracking-[0.2em] text-[11px] uppercase mb-4 py-1.5 px-4 bg-plenna-pink/10 rounded-full">
                 Especialista
               </span>
-              <h2 className="text-[32px] font-bold leading-none mb-2">Dra. Rita</h2>
+              <h2 className="text-[32px] font-bold leading-none mb-2">Dra. Rita Plenna</h2>
               <p className="text-plenna-gold font-semibold uppercase tracking-widest text-[12px]">
                 Plenna Estética & Emagrecimento
               </p>
@@ -505,7 +593,7 @@ export default function Home() {
                </p>
                <div className="mt-6 flex items-center gap-3">
                   <div className="w-10 h-[2px] bg-plenna-gold" />
-                  <span className="text-[14px] font-bold text-plenna-gold uppercase tracking-widest">Rita Vasconcelos</span>
+                  <span className="text-[14px] font-bold text-plenna-gold uppercase tracking-widest">Rita Plenna</span>
                </div>
             </div>
           </motion.div>
@@ -640,12 +728,12 @@ export default function Home() {
             
             <h4 className="text-[22px] font-bold mb-3">Visite nossa Clínica</h4>
             <p className="text-gray-500 text-[14px] leading-relaxed mb-8">
-              Av. Rio Grande do Sul, 517 — Centro <br />
+              Av. Rio Grande do Sul, 517, Térreo — Centro <br />
               <span className="font-bold">Divinópolis - MG</span>
             </p>
 
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Av.+Rio+Grande+do+Sul,+517+-+Centro,+Divinópolis+-+MG"
+              href="https://www.google.com/maps/search/?api=1&query=Av.+Rio+Grande+do+Sul,+517,+T%C3%A9rreo,+Centro,+Divin%C3%B3polis+-+MG"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-plenna-teal text-white font-bold text-[15px] shadow-lg shadow-plenna-teal/20 transition-transform active:scale-95"
