@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #2C2C2C;
+  --plenna-pink: #E8B4C2;
+  --plenna-pink-hover: #D89EB0;
+  --plenna-gold: #E5C8A0;
+  --plenna-teal: #7BC8C1;
+  --plenna-soft: #FAF7F4;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-plenna-pink: var(--plenna-pink);
+  --color-plenna-pink-hover: var(--plenna-pink-hover);
+  --color-plenna-gold: var(--plenna-gold);
+  --color-plenna-teal: var(--plenna-teal);
+  --color-plenna-soft: var(--plenna-soft);
+  
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Poppins", serif;
+}
+
+body {
+  background: var(--plenna-soft);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--plenna-soft);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--plenna-pink);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--plenna-pink-hover);
+}
+
+/* Hide scrollbar for tab rows */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth tap highlight removal for mobile */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Image loading blur-in */
+img {
+  transition: opacity 0.4s ease;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.shadow-soft {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-pink {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,180,194,0.5); }
+  50% { box-shadow: 0 0 0 10px rgba(232,180,194,0); }
+}
