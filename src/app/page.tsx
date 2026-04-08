@@ -215,7 +215,7 @@ export default function Home() {
             {/* Logo */}
             <motion.div variants={fadeUp} className="w-44 mb-7">
               <Image
-                src="/logo.jpg"
+                src="/Logo.jpg"
                 alt="Plenna Estética e Emagrecimento"
                 width={440}
                 height={200}
@@ -732,7 +732,7 @@ export default function Home() {
           <div className="text-center pt-5 border-t border-gray-100">
             <div className="w-24 mx-auto mb-3 opacity-50">
               <Image
-                src="/logo.jpg"
+                src="/Logo.jpg"
                 alt="Plenna Estética"
                 width={96}
                 height={48}

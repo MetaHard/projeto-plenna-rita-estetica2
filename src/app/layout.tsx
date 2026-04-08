@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
@@ -16,6 +16,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://plenna-estetica.vercel.app"),
   title: "Plenna Estética e Emagrecimento | Resultados Reais",
   description:
     "Especialista em lipedema pós-operatório, gordura localizada, seca barriga e diástase em Divinópolis - MG. Agende sua avaliação gratuita!",
@@ -34,7 +35,12 @@ export const metadata: Metadata = {
     description: "Resultados reais. Autoestima de volta. Tratamentos avançados em Divinópolis - MG.",
     type: "website",
   },
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
